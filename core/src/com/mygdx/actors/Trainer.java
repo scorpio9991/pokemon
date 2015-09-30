@@ -11,7 +11,7 @@ package com.mygdx.actors;
  * and open the template in the editor.
  */
 
-import com.mygdx.game.pokemons.Pokemon;
+import com.mygdx.pokemons.pokemonsActions.Pokemon;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -21,58 +21,56 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author Ján
  */
 class Trainer extends Sprite implements Actor {
-
     private List<Pokemon> kapsa = new ArrayList<Pokemon>();
     private int direction;
     private Sprite test;
-////    private static final int FRAME_COLS = 4;
-////    private static final int FRAME_ROWS = 4;
+    ////    private static final int FRAME_COLS = 4;
+    ////    private static final int FRAME_ROWS = 4;
     private TiledMapTileLayer collLayer;
     //  private float tileWidth = collLayer.getTileWidth();
     //  private float tileHeight = collLayer.getTileHeight();
     //  private final int keycode;
- //   private final Texture walkSheet;
- //   private final TextureRegion[] walkFrames;
- //   private final Animation walkAnimation;
-//    private Texture pright;
-//    private Texture pleft;
-//    private Texture pdown;
-//    private Texture pup;
-//    private boolean left;
-//    private final Texture pdownleft;
-//    private final Texture pdownright;
-//    private final Texture pleftleft;
-//    private final Texture pleftright;
+    //   private final Texture walkSheet;
+    //   private final TextureRegion[] walkFrames;
+    //   private final Animation walkAnimation;
+    //    private Texture pright;
+    //    private Texture pleft;
+    //    private Texture pdown;
+    //    private Texture pup;
+    //    private boolean left;
+    //    private final Texture pdownleft;
+    //    private final Texture pdownright;
+    //    private final Texture pleftleft;
+    //    private final Texture pleftright;
     private String Name;
     private boolean active;
 
-    public Trainer(Texture texture,String name) {
+    public Trainer(Texture texture, String name) {
 
         super(texture);
-        this.Name=name;
-        this.active=true;
-//        pright = new Texture("pright.png");
-//        pleft = new Texture("pleft.png");
-//        pdown = new Texture("pdown.png");
-//        pup = new Texture("pup.png");
-//        pdownleft= new Texture("moving/downleft.png");
-//        pdownright= new Texture("moving/downright.png");
-//        pleftleft= new Texture("moving/leftleft.png");
-//        pleftright= new Texture("moving/leftright.png");
-//        walkSheet = texture;
-//        TextureRegion[][] tmp = TextureRegion.split(walkSheet, walkSheet.getWidth() / FRAME_COLS, walkSheet.getHeight() / FRAME_ROWS);
-//        walkFrames = new TextureRegion[FRAME_COLS * FRAME_ROWS];
-//        int index = 0;
-//        for (int i = 0; i < FRAME_ROWS; i++) {
-//            for (int j = 0; j < FRAME_COLS; j++) {
-//                walkFrames[index++] = tmp[i][j];
-//            }
-//        }
-//        walkAnimation = new Animation(0.025f, walkFrames);
+        this.Name = name;
+        this.active = true;
+        //        pright = new Texture("pright.png");
+        //        pleft = new Texture("pleft.png");
+        //        pdown = new Texture("pdown.png");
+        //        pup = new Texture("pup.png");
+        //        pdownleft= new Texture("moving/downleft.png");
+        //        pdownright= new Texture("moving/downright.png");
+        //        pleftleft= new Texture("moving/leftleft.png");
+        //        pleftright= new Texture("moving/leftright.png");
+        //        walkSheet = texture;
+        //        TextureRegion[][] tmp = TextureRegion.split(walkSheet, walkSheet.getWidth() / FRAME_COLS, walkSheet.getHeight() / FRAME_ROWS);
+        //        walkFrames = new TextureRegion[FRAME_COLS * FRAME_ROWS];
+        //        int index = 0;
+        //        for (int i = 0; i < FRAME_ROWS; i++) {
+        //            for (int j = 0; j < FRAME_COLS; j++) {
+        //                walkFrames[index++] = tmp[i][j];
+        //            }
+        //        }
+        //        walkAnimation = new Animation(0.025f, walkFrames);
         setX(128);
         setY(128);
     }
@@ -85,7 +83,7 @@ class Trainer extends Sprite implements Actor {
 
     private void update(float delta) {
 
- //       this.setTexture(walkSheet);
+        //       this.setTexture(walkSheet);
 
     }
 
@@ -120,20 +118,20 @@ class Trainer extends Sprite implements Actor {
         } else {
             System.out.println("Pokemon bag is full");
         }
-
     }
 
     public Pokemon getpokemon(int i) {
         while (kapsa.get(i) == null) {
-           i++;
+            i++;
         }
         return kapsa.get(i);
     }
-    public int getSizeofBag(){
+
+    public int getSizeofBag() {
         return kapsa.size();
-        
     }
-    public void removepokemon(int i){
+
+    public void removepokemon(int i) {
         this.kapsa.remove(i);
     }
 
@@ -149,15 +147,14 @@ class Trainer extends Sprite implements Actor {
 
     @Override
     public void use() {
-        if(this.active==true){
-            
+        if (this.active == true) {
+
         }
     }
 
     @Override
     public void setActivity(boolean active) {
-        this.active=active;
+        this.active = active;
     }
- 
 }
 

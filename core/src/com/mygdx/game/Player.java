@@ -5,7 +5,7 @@
  */
 package com.mygdx.game;
 
-import com.mygdx.game.pokemons.Pokemon;
+import com.mygdx.pokemons.pokemonsActions.Pokemon;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -17,11 +17,9 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- *
  * @author Ján
  */
 public class Player extends Sprite {
-
     private final List<Pokemon> kapsa = new ArrayList<Pokemon>();
     private final List<Item> bag = new ArrayList<Item>();
     private int direction;
@@ -33,7 +31,6 @@ public class Player extends Sprite {
     private int Idoriginal;
 
     public Player(Texture texture) {
-
         super(texture);
         this.name = "Johnny";
         walkSheet = texture;
@@ -91,23 +88,19 @@ public class Player extends Sprite {
         } else {
             //TODO: BAG FULL CONDITION
         }
-
     }
 
     public void swapminus(int poz) {
         //kapsa.remove(poz);
         Collections.swap(kapsa, poz, poz - 1);
-
     }
 
     public void swapplus(int poz) {
         //kapsa.remove(poz);
         Collections.swap(kapsa, poz, poz + 1);
-
     }
 
     public Pokemon getpokemon(int i) {
-
         while (kapsa.get(i) == null) {
             i++;
         }
@@ -116,7 +109,6 @@ public class Player extends Sprite {
 
     public int getSizeofBag() {
         return kapsa.size();
-
     }
 
     public int getSizeofITEMbag() {
@@ -132,7 +124,6 @@ public class Player extends Sprite {
     }
 
     public Item getitem(int i) {
-
         return bag.get(i);
     }
 
@@ -155,5 +146,4 @@ public class Player extends Sprite {
         kapsa.remove(original);
         kapsa.add(this.Idoriginal, evolved);
     }
-
 }

@@ -6,13 +6,14 @@
 package com.mygdx.actors;
 
 /**
- *
  * @author Ján
  */
 public interface Actor {
     String getName();
+
     boolean isActive();
+
     void use();
+
     void setActivity(boolean active);
-    
 }

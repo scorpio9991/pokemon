@@ -17,11 +17,9 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
- *
  * @author Ján
  */
 public class StartMenu implements Screen {
-
     private Texture texture;
     private Batch batch;
     private boolean ended = false;
@@ -56,9 +54,8 @@ public class StartMenu implements Screen {
             if (logo.getY() == 480) {
                 openingsound.stop();
                 this.ended = true;
-            }
-            else{
-               //TODO: LOAD
+            } else {
+                //TODO: LOAD
             }
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
@@ -92,7 +89,6 @@ public class StartMenu implements Screen {
     }
 
     public boolean ended() {
-
         return this.ended;
     }
 }

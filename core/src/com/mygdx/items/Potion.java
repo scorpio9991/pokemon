@@ -6,25 +6,25 @@
 package com.mygdx.items;
 
 import com.mygdx.game.Player;
-import com.mygdx.game.pokemons.Pokemon;
+import com.mygdx.pokemons.pokemonsActions.Pokemon;
 
 /**
- *
  * @author Ján
  */
-public class Potion implements Item{
+public class Potion implements Item {
     private String name;
     private int uses;
     private final String desc;
-    public Potion(){
-        this.name="Potion";
-        this.uses=1;
-        this.desc="Restores 20 HP to a pokemon";
+
+    public Potion() {
+        this.name = "Potion";
+        this.uses = 1;
+        this.desc = "Restores 20 HP to a pokemon";
     }
 
     @Override
-    public void use(Player player,Pokemon allie, Pokemon enemy) {
-        allie.sethp(allie.gethp()+40);
+    public void use(Player player, Pokemon allie, Pokemon enemy) {
+        allie.setHP(allie.getHP() + 40);
         uses--;
     }
 
@@ -46,5 +46,4 @@ public class Potion implements Item{
     public String getDescription() {
         return this.desc;
     }
-    
 }

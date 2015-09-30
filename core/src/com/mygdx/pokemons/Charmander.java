@@ -3,59 +3,59 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mygdx.game.pokemons;
+package com.mygdx.pokemons;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.pokemons.pokemonsActions.Actions;
+import com.mygdx.pokemons.pokemonsActions.Pokemon;
 
 /**
- *
  * @author Ján
  */
-public class Psyduck extends Sprite implements Pokemon {
-
+public class Charmander extends Sprite implements Pokemon {
     private int hp;
     private String status;
     private Pokemon opponent;
     private int attackStat;
     private int defStat;
-    private final String attribute;
+    private String attribute;
     private int endurance;
     private int level;
-    private final String move1;
+    private final Actions actions;
+    private String name;
+    private String move1;
     private String move2;
     private String move3;
     private String move4;
     private int pocet;
     private Color oricolor;
     private int experience;
-    private String name;
 
-    public Psyduck(int level, boolean istrainer) {
-        super(new Texture("Fpsyduck.png"));
+    public Charmander(int level, boolean istrainer) {
+        super(new Texture("FCharmander.png"));
         if (istrainer == true) {
-            super.setTexture(new Texture("Bpsyduck.png"));
+            super.setTexture(new Texture("BCharmander.png"));
         }
         this.level = level;
         this.endurance = this.getLevel() * 1;
         this.hp = this.getEndurance() * 2;
-        this.attackStat = this.getLevel() / 2;
-        this.defStat = this.getLevel();
-        this.move1 = "Splash";
-        this.attribute = "water";
-
+        this.actions = new Actions();
+        this.move1 = "Bite";
+        this.move2 = "Ember";
+        this.attackStat = this.getLevel();
+        this.defStat = this.getLevel() / 2;
+        this.attribute = "fire";
     }
 
-    @Override
     public void draw(SpriteBatch spriteBatch) {
         update(Gdx.graphics.getDeltaTime());
         super.draw(spriteBatch);
     }
 
-    @Override
     public void setPosition(float x, float y) {
         super.setPosition(x, y);
     }
@@ -65,7 +65,7 @@ public class Psyduck extends Sprite implements Pokemon {
     }
 
     @Override
-    public int gethp() {
+    public int getHP() {
         return this.hp;
     }
 
@@ -80,7 +80,7 @@ public class Psyduck extends Sprite implements Pokemon {
     }
 
     @Override
-    public void sethp(int hp) {
+    public void setHP(int hp) {
         this.hp = hp;
         if (this.hp < 0) {
             this.hp = 0;
@@ -91,8 +91,13 @@ public class Psyduck extends Sprite implements Pokemon {
     }
 
     @Override
-    public void setopponent(Pokemon pokemon) {
+    public void setOpponent(Pokemon pokemon) {
         this.opponent = pokemon;
+    }
+
+    @Override
+    public int[] getPosition() {
+        return new int[0];
     }
 
     @Override
@@ -108,7 +113,6 @@ public class Psyduck extends Sprite implements Pokemon {
     @Override
     public String move3() {
         return this.move3;
-
     }
 
     @Override
@@ -131,12 +135,18 @@ public class Psyduck extends Sprite implements Pokemon {
     }
 
     @Override
-    public void setDefStat() {
+    public void setDefStat(int defstat) {
+
     }
 
     @Override
-    public String getattribute() {
+    public String getAttribute() {
         return this.attribute;
+    }
+
+    @Override
+    public void setAttribute(String attribute) {
+
     }
 
     @Override
@@ -150,13 +160,24 @@ public class Psyduck extends Sprite implements Pokemon {
     }
 
     @Override
-    public boolean levelup(int exp) {
-        this.experience += exp;
-        if (this.experience == this.getLevel() * 10) {
-            this.level += 1;
+    public Pokemon getOpponent() {
+        return null;
+    }
 
+    @Override
+    public boolean levelup(int exp) {
+
+        this.experience += exp;
+        if (this.experience >= this.getLevel() * 10) {
+            this.level += 1;
+            if (this.level == 12) {
+                this.move3 = "QuickAttack";
+            }
+            this.experience = 0;
             this.attackStat += 2;
             this.defStat += 1;
+            this.endurance += 2;
+            this.setHP(this.getEndurance() * 2);
             return true;
         } else {
             return false;
@@ -170,7 +191,12 @@ public class Psyduck extends Sprite implements Pokemon {
 
     @Override
     public String getName() {
-        return this.name = "Psyduck";
+        return this.name = "Charmander";
+    }
+
+    @Override
+    public void setName(int name) {
+
     }
 
     @Override
@@ -178,14 +204,11 @@ public class Psyduck extends Sprite implements Pokemon {
         if (pocet == 0) {
             oricolor = super.getColor();
         }
-        if(pocet%10 == 0){
+        if (pocet % 10 == 0) {
             super.setColor(Color.DARK_GRAY);
+        } else if (pocet % 5 == 0) {
+            super.setColor(oricolor);
         }
-        else if(pocet%5==0){
-             super.setColor(oricolor);
-        }
-        
-        
 
         if (pocet == 74) {
             pocet = 0;
@@ -200,7 +223,7 @@ public class Psyduck extends Sprite implements Pokemon {
     }
 
     @Override
-    public void settrainer(boolean trainer) {
-        super.setTexture(new Texture("Bpsyduck.png"));
+    public void setTrainer(boolean trainer) {
+        super.setTexture(new Texture("BCharmander.png"));
     }
 }

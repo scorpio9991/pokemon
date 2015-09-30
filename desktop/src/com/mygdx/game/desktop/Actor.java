@@ -14,13 +14,10 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.g2d.Animation;
 
-
 /**
- *
  * @author Ján
  */
 public class Actor implements ApplicationListener {
-
     private SpriteBatch batch;
     private Texture texture;
     private Sprite sprite;
@@ -30,7 +27,7 @@ public class Actor implements ApplicationListener {
     public void create() {
         batch = new SpriteBatch();
         texture = new Texture("Red.png");
- //       batch = new SpriteBatch();
+        //       batch = new SpriteBatch();
         //    texture = new Texture(Gdx.files.internal("Red.png"));
         sprite = new Sprite(texture);
     }
@@ -41,7 +38,7 @@ public class Actor implements ApplicationListener {
 
     @Override
     public void render() {
-     //   Gdx.gl.glClearColor(1, 1, 1, 1);
+        //   Gdx.gl.glClearColor(1, 1, 1, 1);
         //   Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
@@ -65,6 +62,4 @@ public class Actor implements ApplicationListener {
         batch.dispose();
         texture.dispose();
     }
-
-
 }
