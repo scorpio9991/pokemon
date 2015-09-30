@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="40" height="40" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="tileset_pokemon_resurgent_by_zeo254-d875yg3" tilewidth="16" tileheight="16">
+  <image source="tileset_pokemon_resurgent_by_zeo254-d875yg3.png" width="368" height="560"/>
+ </tileset>
+ <layer name="background" width="40" height="40">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3RwQmAMBBE0RiwCO2/ErUJtQm1AvfgRQlEhCQT+Yd3/zvrnXMeSXWX0h2xvqfSXbE+ld63faV6v3SpbAsAf9YLNCDvj1P+vG3y3KBCtas2yjsqt9XYibvBjGYSaAmZzWJWgZaQzezmEGgBACDmBOilUsIAGQAA
+  </data>
+ </layer>
+ <layer name="grass" width="40" height="40">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3TOwoAIAwEUfEW3v+iVoJaun42Mg8CKadIUsItRZgX3Ptm7n1NhL5+d+vDGxHulr519Gno09CnoU+j9OUjRaOf+26gT+PeB2Av95937wPgqwIPI3AyABkAAA==
+  </data>
+ </layer>
+ <layer name="walls" width="40" height="40" opacity="0.9">
+  <properties>
+   <property name="block" value="1"/>
+  </properties>
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+2XW3LTMBRAJacv2EBbpy2wAkjTUn75gSQtMP3jB8p72AHtKtgGdBM8FwADfS+gkFBaWAFHQzVRNH6MnJvUH70zZ6SRLPv42mNdV7RS80PglVJqPZANiFnbHAJF/WqsjWm3YFsNLvr1+wVHJfUz70eZ82fejzLnbxgh7XcTVrUcWX5v4C1sBvjdh5dajtcqnXfwHj4kzA3r+RaJuj736ydC/cY5dgIuwEWdPf6N9rv5rsI27MAu7AVcL9RvjmMvwWW4orPH27Qd812FI/gNx3AyQL9Fjr0OS3BDZ4/rSKkIKjACozAG41H/fhVnvxtz5lfo34G7cC9nfAqPaYihCjMwC3MCfrGz380680/pP4Pn8CJn/Coe16AG81CHBVgU8DNj5jSR5xcSt1h8GxrQhBYsB7i5fvZZ2jYW8HvA4oewBo/gMTwp6GefpW1tzWUo4idVq9VO/T7S/wSf1f9ataG7dfkCtFQ2fkjVatZvj/4+HKjeWj9K6futH9L5O6H/B/6q3lo/Sun7rR/S+fP3p7Q8nVX+/P0pLU9nlT9/fwr99x5JYFSgLrJ+/v4U+u9dTWBG0M/fnyTen7qgnx8S78/yAP3KEud+4fET2tBRXb+2SqaTcw4peq6Djzb1k+76TaUQpeU2Y00Rpp0cTTpjeX7uOpfJnOt94ZivqrivXZ/nV5RDzv2jDz+7Pskv5N6l8pQ2n+QXcu9SeQrxKxPGza3ly0YL/gHE6BbOABkAAA==
+  </data>
+ </layer>
+ <objectgroup name="Block" width="40" height="40">
+  <object name="player" x="-3" y="423" width="17" height="92"/>
+  <object x="0" y="410" width="364" height="15"/>
+  <object x="208" y="513" width="331" height="17"/>
+  <object x="1" y="517" width="124" height="14"/>
+  <object x="114" y="545" width="105" height="10"/>
+  <object x="214" y="527" width="16" height="16"/>
+  <object x="107" y="525" width="16" height="16"/>
+  <object x="632" y="152" height="479"/>
+  <object x="7" y="627" width="623"/>
+  <object x="340" y="309" width="18" height="92"/>
+  <object x="53" y="430" width="16" height="11"/>
+  <object x="-3" y="428" width="28" height="18"/>
+  <object x="100" y="117" width="436" height="20"/>
+  <object x="569" y="122" width="62" height="12"/>
+  <object x="520" y="109" width="64" height="12"/>
+  <object x="354" y="198" width="103" height="102"/>
+  <object x="84" y="437" width="21" height="19"/>
+  <object x="354" y="431" width="9" height="26"/>
+  <object x="534" y="530" width="47" height="4"/>
+  <object x="578" y="503" width="5" height="20"/>
+  <object x="590" y="501" width="23"/>
+  <object x="616" y="510" width="2" height="24"/>
+  <object x="3" y="8" width="8" height="393"/>
+  <object x="16" y="5" width="396" height="15"/>
+  <object x="423" y="4" width="3" height="110"/>
+  <object x="18" y="332" width="248" height="63"/>
+  <object x="83" y="242" width="56" height="82"/>
+  <object x="22" y="293" width="54" height="32"/>
+  <object x="275" y="196" width="55" height="70"/>
+  <object x="179" y="197" width="54" height="68"/>
+  <object x="21" y="32" width="36" height="59"/>
+  <object x="-1" y="537" width="15" height="89"/>
+ </objectgroup>
+ <objectgroup name="danger" width="40" height="40">
+  <object x="131" y="515" width="71" height="22"/>
+  <object x="552" y="104" height="6"/>
+ </objectgroup>
+ <objectgroup name="danger2" width="40" height="40">
+  <object x="568" y="150" width="51" height="260"/>
+ </objectgroup>
+ <objectgroup name="danger3" width="40" height="40">
+  <object x="148" y="37" width="261" height="69"/>
+ </objectgroup>
+</map>

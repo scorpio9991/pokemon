@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="10" height="10" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="hg_ss_indoor_tiles_1_by_alucus-d6hulj4" tilewidth="16" tileheight="16">
+  <image source="hg_ss_indoor_tiles_1_by_alucus-d6hulj4.png" width="608" height="192"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="10" height="10">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC3XJaTqCAQCF0Q8VG5Ep9hBSyZBhD5oo87AHSsVGDJE2QsY2UmcBeZ57/tw3HgTBIkssk2CFJCnSrLJHjjwFipTY54AyFa65oUqNW+o0aHLHPQ888sQzLV54pc0bHd75oMsnX3zzwy9/9OgTjBijjBEiTIRxJpgkyhTTzDDLHDHmWSDDGutssEmWLbbZYZdDjjjmhFPOOOeCS67+acO+AVCQ6B6QAQAA
+  </data>
+ </layer>
+ <objectgroup name="block" width="10" height="10">
+  <object x="-18" y="7" width="15" height="153"/>
+  <object x="-5" y="-22" width="161" height="18"/>
+  <object x="164" y="-1" width="18" height="162"/>
+  <object x="1" y="165" width="169" height="14"/>
+  <object x="148" y="118" width="6" height="22"/>
+  <object x="131" y="41"/>
+  <object x="125" y="41"/>
+  <object x="85" y="30" width="68" height="19"/>
+  <object x="0" y="18" width="156" height="9"/>
+  <object x="7" y="102" width="34" height="36"/>
+ </objectgroup>
+</map>
