@@ -16,11 +16,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.items.ItemParser;
 
 /**
- *
  * @author Ján
  */
 class FightMenu extends ApplicationAdapter {
-
     private final BitmapFont font;
     private final SpriteBatch batch;
     private final Texture texturelogo;
@@ -76,12 +74,12 @@ class FightMenu extends ApplicationAdapter {
 
         tabcombat.draw(batch);
         tabcombat.setPosition(logoX, logoY);
-        if (infight && this.choosingPoke == false) {
+        if (infight && !this.choosingPoke) {
             fightmenu();
-        } else if (this.choosingPoke == true) {
+        } else if (this.choosingPoke) {
             mainmenu();
             choosePokemon();
-        } else if (this.choosingBag == true) {
+        } else if (this.choosingBag) {
             mainmenu();
             chooseItem();
         } else {
@@ -89,20 +87,17 @@ class FightMenu extends ApplicationAdapter {
         }
         logo.setPosition(this.cursorX, this.cursorY);
         logo.draw(batch);
-        if (this.turnover == false) {
-            if (this.choosingPoke == false&&this.choosingBag==false) {
+        if (!this.turnover) {
+            if (!this.choosingPoke && !this.choosingBag) {
                 cursormoving();
                 cursorControl();
                 this.waschoosing = false;
             }
-            
         }
         message(this.message, 0);
-
     }
 
     private void mainmenu() {
-
         font.draw(batch, "Fight", left, top);
         font.draw(batch, "Run", right, top);
         font.draw(batch, "Bag", left, bot);
@@ -123,7 +118,6 @@ class FightMenu extends ApplicationAdapter {
         if (this.combatscreen.getAlliePokemon().move3() != null) {
             font.draw(batch, this.combatscreen.getAlliePokemon().move3(), right, bot);
         }
-
     }
 
     private void cursormoving() {
@@ -146,7 +140,7 @@ class FightMenu extends ApplicationAdapter {
     private void cursorControl() {
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             if (this.cursorY == 202 && this.cursorX == 480) {
-                if (this.infight == false) {
+                if (!this.infight) {
                     infight = true;
                 } else {
                     combatscreen.setAttackmove(this.combatscreen.getAlliePokemon().move1());
@@ -154,7 +148,7 @@ class FightMenu extends ApplicationAdapter {
                 }
             }
             if (this.cursorY == 202 && this.cursorX == 590) {
-                if (this.infight == false) {
+                if (!this.infight) {
                     message("You cant run!", 1);
                     this.turnover = true;
                 } else {
@@ -163,7 +157,7 @@ class FightMenu extends ApplicationAdapter {
                 }
             }
             if (this.cursorY == 152 && this.cursorX == 590) {
-                if (this.infight == false) {
+                if (!this.infight) {
                     this.choosingPoke = true;
                     this.cursorY = 465;
                     this.cursorX = 550;
@@ -173,23 +167,21 @@ class FightMenu extends ApplicationAdapter {
                     this.turnover = true;
                 }
             }
-            if (this.cursorY == 152 && this.cursorX == 480 && infight == false) {
-                if (this.infight == false) {
+            if (this.cursorY == 152 && this.cursorX == 480 && !infight) {
+                if (!this.infight) {
                     this.choosingBag = true;
                     this.cursorY = 465;
                     this.cursorX = 550;
-                    this.atpokemon=0;
+                    this.atpokemon = 0;
                 } else {
                     combatscreen.setAttackmove(this.combatscreen.getAlliePokemon().move4());
                     this.turnover = true;
                 }
             }
-
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.CONTROL_LEFT)) {
             infight = false;
-
         }
     }
 
@@ -207,15 +199,11 @@ class FightMenu extends ApplicationAdapter {
             this.message = message;
 
             if (this.dlzkamess <= 75 || this.continuous) {
-                if (this.message != null) {
-                    font.draw(batch, this.message, 150, 200);
-
-                    dlzkamess++;
-                }
-            } else if (this.continuous == false) {
+                font.draw(batch, this.message, 150, 200);
+                dlzkamess++;
+            } else if (!this.continuous) {
                 this.message = null;
             }
-
         }
     }
 
@@ -223,32 +211,30 @@ class FightMenu extends ApplicationAdapter {
         numberid = 0;
         int y = 480;
         chooselogo.draw(batch);
-        
-//        for(int i = 0; i <- player.getSizeofBag(); i++){
-//            text.draw(batch, player.getpokemon(i).getName(), 565, y);
-//            if(player.getpokemon(i).gethp()==0){
-//                text.draw(batch, "DEAD", 655, y);
-//            } else
-//            text.draw(batch, "Hp:" + player.getpokemon(i).gethp() + " Lv:" + player.getpokemon(i).getLevel(), 655, y);
-//            y -= 30;
-//        }
-        
+
+        //        for(int i = 0; i <- player.getSizeofBag(); i++){
+        //            text.draw(batch, player.getpokemon(i).getName(), 565, y);
+        //            if(player.getpokemon(i).getHP()==0){
+        //                text.draw(batch, "DEAD", 655, y);
+        //            } else
+        //            text.draw(batch, "Hp:" + player.getpokemon(i).getHP() + " Lv:" + player.getpokemon(i).getLevel(), 655, y);
+        //            y -= 30;
+        //        }
+
         while (player.getSizeofBag() != numberid) {
             text.draw(batch, player.getpokemon(numberid).getName(), 565, y);
-            if(player.getpokemon(numberid).gethp()==0){
+            if (player.getpokemon(numberid).getHP() == 0) {
                 text.draw(batch, "DEAD", 655, y);
             } else
-            text.draw(batch, "Hp:" + player.getpokemon(numberid).gethp() + " Lv:" + player.getpokemon(numberid).getLevel(), 655, y);
+                text.draw(batch, "Hp:" + player.getpokemon(numberid).getHP() + " Lv:" + player.getpokemon(numberid).getLevel(), 655, y);
             numberid++;
             y -= 30;
-
         }
         posledny = y + 30;
-        if (Gdx.input.isKeyJustPressed(Input.Keys.CONTROL_LEFT) && this.haveToChoose == false) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.CONTROL_LEFT) && !this.haveToChoose) {
             this.choosingPoke = false;
             this.cursorX = 590;
             this.cursorY = 152;
-
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.UP) && this.cursorY < 480 - 15) {
             this.cursorY += 30;
@@ -259,7 +245,7 @@ class FightMenu extends ApplicationAdapter {
             this.atpokemon += 1;
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-            if (player.getpokemon(this.atpokemon).gethp() == 0) {
+            if (player.getpokemon(this.atpokemon).getHP() == 0) {
                 message("This Pokemon is dead", 1);
             } else {
                 this.combatscreen.setAlliePokemon(player.getpokemon(this.atpokemon));
@@ -267,14 +253,13 @@ class FightMenu extends ApplicationAdapter {
                 this.choosingPoke = false;
                 this.waschoosing = true;
                 this.haveToChoose = false;
-                this.choosingBag=false;
+                this.choosingBag = false;
                 combatscreen.noLongerNeedtoSwitch();
                 message(player.getpokemon(this.atpokemon).getName() + " ,I choose you!", 1);
                 cursorX = 480;
                 cursorY = 202;
             }
         }
-
     }
 
     public boolean isTurnOver() {
@@ -302,14 +287,13 @@ class FightMenu extends ApplicationAdapter {
     }
 
     private void chooseItem() {
-                numberid = 0;
+        numberid = 0;
         int y = 480;
         chooselogo.draw(batch);
-        while (player.getSizeofITEMbag()!= numberid) {
-            text.draw(batch, player.getitem(numberid).getName()+": X"+player.getitem(numberid).getUses(), 565, y);
+        while (player.getSizeofITEMbag() != numberid) {
+            text.draw(batch, player.getitem(numberid).getName() + ": X" + player.getitem(numberid).getUses(), 565, y);
             numberid++;
             y -= 30;
-
         }
         posledny = y + 30;
         if (Gdx.input.isKeyJustPressed(Input.Keys.CONTROL_LEFT)) {
@@ -317,7 +301,6 @@ class FightMenu extends ApplicationAdapter {
             this.choosingBag = false;
             this.cursorX = 590;
             this.cursorY = 152;
-
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.UP) && this.cursorY < 480 - 15) {
             this.cursorY += 30;
@@ -328,27 +311,24 @@ class FightMenu extends ApplicationAdapter {
             this.atpokemon += 1;
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-            if(ItemParser.parse(player.getitem(this.atpokemon))==1||ItemParser.parse(player.getitem(this.atpokemon))==0){
-                if("Pokeball".equals(player.getitem(this.atpokemon).getName())){
+            if (ItemParser.parse(player.getitem(this.atpokemon)) == 1 || ItemParser.parse(player.getitem(this.atpokemon)) == 0) {
+                if ("Pokeball".equals(player.getitem(this.atpokemon).getName())) {
                     combatscreen.pokeCatched();
-                    
                 }
-                this.message("Player used: "+player.getitem(this.atpokemon).getName(), 1);
+                this.message("Player used: " + player.getitem(this.atpokemon).getName(), 1);
                 player.getitem(this.atpokemon).use(player, this.combatscreen.getAlliePokemon(), this.combatscreen.getEnemyPokemon());
-                if(player.getitem(this.atpokemon).getUses()==0){
+                if (player.getitem(this.atpokemon).getUses() == 0) {
                     player.checkAndEmpty();
                 }
                 this.turnover = true;
                 this.choosingPoke = false;
                 this.waschoosing = true;
                 this.haveToChoose = false;
-                this.choosingBag=false;
+                this.choosingBag = false;
                 cursorX = 480;
                 cursorY = 202;
-            
-        }
-            else this.message("Cannot be used in combat", 1);
+            } else
+                this.message("Cannot be used in combat", 1);
         }
     }
-
 }

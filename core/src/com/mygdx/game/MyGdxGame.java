@@ -1,22 +1,14 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.FPSLogger;
-import com.mygdx.game.pokemons.Caterpie;
-import com.mygdx.game.pokemons.Charmander;
-import com.mygdx.game.pokemons.Pidgey;
-import com.mygdx.game.pokemons.Psyduck;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.items.Pokeball;
 import com.mygdx.items.Potion;
 import com.mygdx.items.RareCandy;
 
 public class MyGdxGame extends Game {
-
     private SpriteBatch batch;
     private Texture img;
     private FPSLogger fpsLogger;
@@ -28,9 +20,8 @@ public class MyGdxGame extends Game {
     private Play playmenu;
 
     public void change() {
-
     }
-    
+
     @Override
     public void create() {
         pokefactory = new PokeFactory();
@@ -46,7 +37,7 @@ public class MyGdxGame extends Game {
         player.addpokemon(pokefactory.getPoke("Charmander", true));
         player.addpokemon(pokefactory.getPoke("Caterpie", true));
         player.addpokemon(pokefactory.getPoke("PsyDuck", true));
-   //     player.addpokemon(pokefactory.getPoke("Pidgey", true));
+        //     player.addpokemon(pokefactory.getPoke("Pidgey", true));
 
         fpsLogger = new FPSLogger();
         startmenu = new StartMenu();
@@ -56,20 +47,18 @@ public class MyGdxGame extends Game {
     @Override
     public void resize(int width, int height) {
         super.resize(width, height);
-
     }
 
     @Override
     public void render() {
         super.render();
-        if (startmenu.ended() == true) {
-            if(getScreen()==startmenu)
-            setScreen(playmenu);
+        if (startmenu.ended()) {
+            if (getScreen() == startmenu)
+                setScreen(playmenu);
         } else {
-            if(getScreen()==null)
-            setScreen(startmenu);
+            if (getScreen() == null)
+                setScreen(startmenu);
         }
-
     }
 
     @Override
@@ -85,6 +74,5 @@ public class MyGdxGame extends Game {
     @Override
     public void resume() {
         super.resume();
-
     }
 }

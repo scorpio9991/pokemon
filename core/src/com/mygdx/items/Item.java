@@ -6,16 +6,19 @@
 package com.mygdx.items;
 
 import com.mygdx.game.Player;
-import com.mygdx.game.pokemons.Pokemon;
+import com.mygdx.pokemons.pokemonsActions.Pokemon;
 
 /**
- *
  * @author Ján
  */
 public interface Item {
-    public void use(Player player,Pokemon allie, Pokemon enemy);
+    public void use(Player player, Pokemon allie, Pokemon enemy);
+
     public String getName();
-    public void add(); 
+
+    public void add();
+
     public int getUses();
+
     public String getDescription();
 }

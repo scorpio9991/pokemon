@@ -6,9 +6,6 @@
 package com.badlogic.gdx.graphics;
 
 /**
- *
  * @author Ján
  */
-public class GL10 {
-    
-}
+public class GL10 {}

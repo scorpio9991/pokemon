@@ -14,16 +14,13 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game.pokemons.Pokemon;
 import com.mygdx.items.Item;
 import com.mygdx.items.ItemParser;
 
 /**
- *
  * @author Ján
  */
 public class Menu implements Screen {
-
     private final Player player;
     private BitmapFont font;
     private Batch batch;
@@ -54,7 +51,6 @@ public class Menu implements Screen {
     private boolean playermenu;
 
     /**
-     *
      * @param game
      * @param play
      * @param player
@@ -64,12 +60,10 @@ public class Menu implements Screen {
         this.play = play;
         this.game = game;
         this.player = player;
-
     }
 
     @Override
     public void show() {
-
         batch = new SpriteBatch();
         font = new BitmapFont();
         font.setColor(Color.BLACK);
@@ -103,13 +97,13 @@ public class Menu implements Screen {
         //   player.draw(batch);
         //  renderer.render();
         mainmenu();
-        if (pokemonmenu == true) {
+        if (pokemonmenu) {
             pokemonmenu();
             cursorMovement();
-        } else if (itemmenu == true) {
+        } else if (itemmenu) {
             itemmenu();
             cursorMovement();
-        } else if (playermenu == true) {
+        } else if (playermenu) {
             playermenu();
         } else {
             cursorMovement();
@@ -122,9 +116,7 @@ public class Menu implements Screen {
             play.menuStop();
             game.setScreen(play);
             play.setDirectionTexture();
-
         }
-
     }
 
     @Override
@@ -155,7 +147,7 @@ public class Menu implements Screen {
     }
 
     private void cursorMovement() {
-        if (this.pokemonmenu == false && this.itemmenu == false) {
+        if (!this.pokemonmenu && !this.itemmenu) {
             if (this.cursorY > 582) {
                 this.cursorY = 582;
             }
@@ -166,19 +158,16 @@ public class Menu implements Screen {
             logo.setPosition(this.cursorX, this.cursorY);
             if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
                 this.cursorY -= 50;
-
             }
-
             if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
                 this.cursorY += 50;
-
             }
             logo.draw(batch);
         } else {
-            if (this.pokemonmenu == true) {
+            if (this.pokemonmenu) {
                 this.maxcursorY = 582 - 40 * player.getSizeofBag() + 40;
             }
-            if (this.itemmenu == true) {
+            if (this.itemmenu) {
                 this.maxcursorY = 582 - 40 * player.getSizeofITEMbag() + 40;
             }
             if (this.cursorY > 582) {
@@ -192,13 +181,10 @@ public class Menu implements Screen {
             if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
                 //   poz--;
                 this.cursorY -= 40;
-
             }
-
             if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
                 //  poz++;
                 this.cursorY += 40;
-
             }
             logo.draw(batch);
         }
@@ -240,14 +226,12 @@ public class Menu implements Screen {
     }
 
     private void mainmenu() {
-
         tabLogo.draw(batch);
         font.draw(batch, "Pokemon", left, top + 100);
         font.draw(batch, "Items", left, top + 50);
         font.draw(batch, "Player", left, top);
         font.draw(batch, "Save", left, bot);
         font.draw(batch, "Exit Game", left, bot - 50);
-
     }
 
     private void itemmenu() {
@@ -257,30 +241,26 @@ public class Menu implements Screen {
         while (player.getSizeofITEMbag() != i) {
             text.draw(batch, player.getitem(i).getName() + ": x" + player.getitem(i).getUses(), 360, y);
 
-            //   text.draw(batch, "Hp:" + player.getitem(i).gethp() + " Lv:" + player.getpokemon(i).getLevel(), 450, y);
+            //   text.draw(batch, "Hp:" + player.getitem(i).getHP() + " Lv:" + player.getpokemon(i).getLevel(), 450, y);
             i++;
             y -= 40;
-
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.CONTROL_LEFT)) {
             this.itemmenu = false;
             this.cursorX -= 220;
             this.cursorY = 532;
-
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.C)) {
             this.message(player.getitem(poz).getDescription(), 1);
-
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             if ((ItemParser.parse(player.getitem(poz)) == (2)) || (ItemParser.parse(player.getitem(poz)) == (0))) {
-                if (moving == false) {
+                if (!moving) {
                     tempitem = player.getitem(poz);
                     usingItem = true;
                     pokemonmenu = true;
                     itemmenu = false;
-
                 }
             } else {
                 this.message("This item cannot be used in the menu", 1);
@@ -304,32 +284,28 @@ public class Menu implements Screen {
         int y = 598;
         while (player.getSizeofBag() != i) {
             text.draw(batch, player.getpokemon(i).getName(), 360, y);
-            if (player.getpokemon(i).gethp() == 0) {
+            if (player.getpokemon(i).getHP() == 0) {
                 text.draw(batch, "DEAD", 450, y);
             } else {
-                text.draw(batch, "Hp:" + player.getpokemon(i).gethp() + " Lv:" + player.getpokemon(i).getLevel(), 450, y);
+                text.draw(batch, "Hp:" + player.getpokemon(i).getHP() + " Lv:" + player.getpokemon(i).getLevel(), 450, y);
             }
             i++;
             y -= 40;
-
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.C)) {
-            this.message("Name: " + player.getpokemon(poz).getName() + " Atribbute: " + player.getpokemon(poz).getattribute(), 1);
-
+            this.message("Name: " + player.getpokemon(poz).getName() + " Atribbute: " + player.getpokemon(poz).getAttribute(), 1);
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.CONTROL_LEFT)) {
             this.pokemonmenu = false;
             this.cursorX -= 220;
             this.cursorY = 582;
             this.usingItem = false;
-
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-            if (usingItem == false) {
-                if (moving == false) {
+            if (!usingItem) {
+                if (!moving) {
                     moving = true;
                     cursorX += 20;
-
                 } else {
                     moving = false;
                     cursorX -= 20;
@@ -345,7 +321,7 @@ public class Menu implements Screen {
             }
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
-            if (moving == true) {
+            if (moving) {
                 if (poz - 1 >= 0) {
                     player.swapminus(poz);
                 }
@@ -354,27 +330,25 @@ public class Menu implements Screen {
                 poz--;
             }
         } else if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
-            if (moving == true) {
+            if (moving) {
                 if (poz + 1 < player.getSizeofBag()) {
                     player.swapplus(poz);
                 }
-
             }
             if (poz + 1 < player.getSizeofBag()) {
                 poz++;
             }
         }
 
-//        font.draw(batch, null, right, 382);
-//        font.draw(batch, null, right, 422);
-//        font.draw(batch, null, right, 462);
-//        font.draw(batch, null, right, 502);
-//        font.draw(batch, null, right, 542);
-//        font.draw(batch, null, right, 582);
+        //        font.draw(batch, null, right, 382);
+        //        font.draw(batch, null, right, 422);
+        //        font.draw(batch, null, right, 462);
+        //        font.draw(batch, null, right, 502);
+        //        font.draw(batch, null, right, 542);
+        //        font.draw(batch, null, right, 582);
     }
 
     public void message(String message, int nova) {
-
         // 1 for 75 renders message
         // 2 for non-stop message
         if (nova == 1) {
@@ -390,16 +364,12 @@ public class Menu implements Screen {
             this.message = message;
 
             if (this.dlzkamess <= 75 || this.continuous) {
-                if (this.message != null) {
-
-                    tabMessage.draw(batch);
-                    font.draw(batch, this.message, 50, 80);
-                    dlzkamess++;
-                }
-            } else if (this.continuous == false) {
+                tabMessage.draw(batch);
+                font.draw(batch, this.message, 50, 80);
+                dlzkamess++;
+            } else if (!this.continuous) {
                 this.message = null;
             }
-
         }
     }
 
@@ -412,7 +382,5 @@ public class Menu implements Screen {
         font.draw(batch, player.getName(), 340, 598);
         font.draw(batch, "This session: " + play.getHours() + ":" + play.getMin(), 340, 548);
         font.draw(batch, "Poke number: " + player.getSizeofBag(), 340, 508);
-
     }
-
 }

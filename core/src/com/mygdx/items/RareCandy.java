@@ -6,25 +6,25 @@
 package com.mygdx.items;
 
 import com.mygdx.game.Player;
-import com.mygdx.game.pokemons.Pokemon;
+import com.mygdx.pokemons.pokemonsActions.Pokemon;
 
 /**
- *
  * @author Ján
  */
 public class RareCandy implements Item {
-        private final String name;
+    private final String name;
     private int uses;
     private final String desc;
-    public RareCandy(){
-    this.name="Rare Candy";
-    this.uses=1;
-    this.desc="Gives choosen Pokemon a level";
-}
+
+    public RareCandy() {
+        this.name = "Rare Candy";
+        this.uses = 1;
+        this.desc = "Gives choosen Pokemon a level";
+    }
 
     @Override
-    public void use(Player player,Pokemon allie, Pokemon enemy) {
-        allie.levelup(allie.getLevel()*10);
+    public void use(Player player, Pokemon allie, Pokemon enemy) {
+        allie.levelup(allie.getLevel() * 10);
         uses--;
     }
 
@@ -47,5 +47,4 @@ public class RareCandy implements Item {
     public String getDescription() {
         return this.desc;
     }
-    
 }

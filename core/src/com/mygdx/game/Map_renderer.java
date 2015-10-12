@@ -12,25 +12,25 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import javax.swing.Renderer;
 
 /**
- *
  * @author Ján
  */
 public class Map_renderer {
-        private OrthogonalTiledMapRenderer Renderedhome;
+    private OrthogonalTiledMapRenderer Renderedhome;
     private OrthogonalTiledMapRenderer Renderedmap;
     private Renderer renderer;
     private final TiledMap mainmap;
     private final TiledMap homemap;
     private final TiledMapTileLayer blockedmap;
-    
-    public Map_renderer(){
-                mainmap = new TmxMapLoader().load("maps/poketest.tmx");
+
+    public Map_renderer() {
+        mainmap = new TmxMapLoader().load("maps/poketest.tmx");
         homemap = new TmxMapLoader().load("maps/home.tmx");
         blockedmap = (TiledMapTileLayer) mainmap.getLayers().get("walls");
         Renderedhome = new OrthogonalTiledMapRenderer(homemap);
         Renderedmap = new OrthogonalTiledMapRenderer(mainmap);
     }
-    public void set_renderer(Renderer renderer){
-        this.renderer=renderer;
+
+    public void set_renderer(Renderer renderer) {
+        this.renderer = renderer;
     }
 }

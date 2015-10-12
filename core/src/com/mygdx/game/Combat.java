@@ -5,7 +5,7 @@
  */
 package com.mygdx.game;
 
-import com.mygdx.game.pokemons.Pokemon;
+import com.mygdx.pokemons.pokemonsActions.Pokemon;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
@@ -22,14 +22,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar.ProgressBarStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.mygdx.game.pokemons.Actions;
+import com.mygdx.pokemons.pokemonsActions.Actions;
 
 /**
- *
  * @author Ján
  */
 class Combat implements Screen {
-
     private ProgressBar hpallie;
     private ProgressBar hpenemy;
     private final MyGdxGame game;
@@ -60,7 +58,6 @@ class Combat implements Screen {
         this.player = player;
         this.enemy = enemy;
         this.trainer = trainer;
-
     }
 
     @Override
@@ -97,10 +94,9 @@ class Combat implements Screen {
     }
 
     private void wildPokemonCombat() {
-        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && (this.enemydead == true || this.enemycatched == true) && i > 146) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && (this.enemydead || this.enemycatched) && i > 146) {
             game.setScreen(play);
             play.setDirectionTexture();
-
         }
         Gdx.gl.glClearColor(0, 1, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -109,22 +105,21 @@ class Combat implements Screen {
         batch.begin();
         if (allie == null) {
             this.allie = player.getpokemon(i);
-            while (this.allie.gethp() == 0) {
+            while (this.allie.getHP() == 0) {
                 i++;
                 this.allie = player.getpokemon(i);
             }
             fightmenu.message("Wild " + enemy.getName() + " has appeared", 1);
-
         }
         hpallie.setRange(0, allie.getEndurance() * 2);
         hpenemy.setRange(0, enemy.getEndurance() * 2);
-        hpallie.setValue(allie.gethp());
-        hpenemy.setValue(enemy.gethp());
+        hpallie.setValue(allie.getHP());
+        hpenemy.setValue(enemy.getHP());
         batch.draw(texture, 100, 120);
-        font.draw(batch, "Hp: " + enemy.gethp(), 150, 465);
+        font.draw(batch, "Hp: " + enemy.getHP(), 150, 465);
         font.draw(batch, enemy.getName(), 180, 495);
         font.draw(batch, "LV: " + enemy.getLevel(), 320, 495);
-        font.draw(batch, allie.gethp() + " / " + allie.getEndurance() * 2, 640, 290);
+        font.draw(batch, allie.getHP() + " / " + allie.getEndurance() * 2, 640, 290);
         font.draw(batch, allie.getName(), 500, 340);
         font.draw(batch, "LV: " + allie.getLevel(), 650, 340);
         font.draw(batch, "What will you do?", 130, 230);
@@ -136,7 +131,7 @@ class Combat implements Screen {
         allie.draw(batch);
         fightmenu.render();
         turn();
-        if (this.needtoswtich == true && fightmenu.amIchoosing() == false) {
+        if (this.needtoswtich && !fightmenu.amIchoosing()) {
             fightmenu.ineedtoChoose();
         }
         batch.end();
@@ -145,17 +140,17 @@ class Combat implements Screen {
             play.setDirectionTexture();
         }
     }
-//jeden tah podla renderu
+
+    //jeden tah podla renderu
     private void turn() {
-        if (fightmenu.isTurnOver() == true && this.enemydead == false && this.needtoswtich == false && this.enemycatched == false) {
-            if (this.alliewasdead == true || this.enemycatched == true) {
+        if (fightmenu.isTurnOver() && !this.enemydead && !this.needtoswtich && !this.enemycatched) {
+            if (this.alliewasdead) {
                 count = 150;
             }
 
             if (count == 0 && this.move != null) {
                 actions.attack(this.move, this.getAlliePokemon(), this.getEnemyPokemon());
                 fightmenu.message(this.getAlliePokemon().getName() + " used " + this.move, 1);
-
             }
             if (count < 75 && this.move != null) {
                 enemy.blickingTexture();
@@ -163,13 +158,11 @@ class Combat implements Screen {
             if (count == 75) {
                 actions.attack(this.enemy.move1(), this.enemy, this.allie);
                 fightmenu.message("Enemy " + this.enemy.getName() + " used " + this.enemy.move1() + "!", 1);
-
             }
 
-            if (this.enemy.gethp() == 0) {
+            if (this.enemy.getHP() == 0) {
                 this.enemydead = true;
                 enemy.death();
-
             }
             if (count > 75 && count < 151 && fightmenu.isTurnOver()) {
                 allie.blickingTexture();
@@ -179,19 +172,17 @@ class Combat implements Screen {
                 count = 0;
                 this.move = null;
                 this.alliewasdead = false;
-                if (this.allie.gethp() == 0) {
+                if (this.allie.getHP() == 0) {
                     fightmenu.message(allie.getName() + "has fainted!", 1);
                     this.needtoswtich = true;
                     this.alliewasdead = true;
                     allie.death();
-
                 }
             } else {
                 count++;
             }
-
         }
-        if (this.enemydead == true) {
+        if (this.enemydead) {
             if (i <= 70) {
                 enemy.blickingTexture();
             }
@@ -207,7 +198,7 @@ class Combat implements Screen {
             }
             i++;
         }
-        if (this.enemycatched == true) {
+        if (this.enemycatched) {
 
             if (i == 146) {
                 fightmenu.message(enemy.getName() + " was caught!", 2);
@@ -242,17 +233,16 @@ class Combat implements Screen {
     @Override
     public void dispose() {
 
-//        batch.dispose();
-//        texture.dispose();
-//        font.dispose();
-//        skin.dispose();
-//     //   fightmenu.dispose();
+        //        batch.dispose();
+        //        texture.dispose();
+        //        font.dispose();
+        //        skin.dispose();
+        //     //   fightmenu.dispose();
 
     }
 
     public void setAlliePokemon(Pokemon allie) {
         this.allie = allie;
-
     }
 
     public Pokemon getAlliePokemon() {
@@ -274,11 +264,10 @@ class Combat implements Screen {
     public void setAttackmove(String move) {
         this.move = move;
     }
-        //I chatched a pokemon
+
+    //I chatched a pokemon
     public void pokeCatched() {
-
         this.enemycatched = true;
-        this.enemy.settrainer(true);
+        this.enemy.setTrainer(true);
     }
-
 }

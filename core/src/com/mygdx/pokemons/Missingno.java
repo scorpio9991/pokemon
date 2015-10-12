@@ -3,20 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mygdx.game.pokemons;
+package com.mygdx.pokemons;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.pokemons.pokemonsActions.Actions;
+import com.mygdx.pokemons.pokemonsActions.Pokemon;
 
 /**
- *
  * @author Ján
  */
-public class Pidgey extends Sprite implements Pokemon {
-
+public class Missingno extends Sprite implements Pokemon {
     private int hp;
     private String status;
     private Pokemon opponent;
@@ -25,29 +25,30 @@ public class Pidgey extends Sprite implements Pokemon {
     private String attribute;
     private int endurance;
     private int level;
+    private final Actions actions;
     private String name;
     private String move1;
     private String move2;
     private String move3;
     private String move4;
-    private Color oricolor;
     private int pocet;
-    private int experience = 0;
+    private Color oricolor;
+    private int experience;
 
-    public Pidgey(int level, boolean istrainer) {
-        super(new Texture("pidgey.png"));
+    public Missingno(int level, boolean istrainer) {
+        super(new Texture("missingno.png"));
         if (istrainer == true) {
-            super.setTexture(new Texture("Bpidgey.png"));
+            super.setTexture(new Texture("missingno.png"));
         }
         this.level = level;
         this.endurance = this.getLevel() * 1;
-        this.hp = this.getEndurance() * 2;;
-        this.move1 = "Scratch";
-        this.move2 = "Growl";
-        this.attackStat = this.getLevel() / 2;
+        this.hp = this.getEndurance() * 2;
+        this.actions = new Actions();
+        this.move1 = "Growl";
+        this.move2 = "Splash";
+        this.attackStat = this.getLevel();
         this.defStat = this.getLevel() / 2;
-        this.attribute = "normal";
-
+        this.attribute = "Death";
     }
 
     public void draw(SpriteBatch spriteBatch) {
@@ -64,7 +65,7 @@ public class Pidgey extends Sprite implements Pokemon {
     }
 
     @Override
-    public int gethp() {
+    public int getHP() {
         return this.hp;
     }
 
@@ -79,7 +80,7 @@ public class Pidgey extends Sprite implements Pokemon {
     }
 
     @Override
-    public void sethp(int hp) {
+    public void setHP(int hp) {
         this.hp = hp;
         if (this.hp < 0) {
             this.hp = 0;
@@ -90,8 +91,13 @@ public class Pidgey extends Sprite implements Pokemon {
     }
 
     @Override
-    public void setopponent(Pokemon pokemon) {
+    public void setOpponent(Pokemon pokemon) {
         this.opponent = pokemon;
+    }
+
+    @Override
+    public int[] getPosition() {
+        return new int[0];
     }
 
     @Override
@@ -107,7 +113,6 @@ public class Pidgey extends Sprite implements Pokemon {
     @Override
     public String move3() {
         return this.move3;
-
     }
 
     @Override
@@ -130,12 +135,18 @@ public class Pidgey extends Sprite implements Pokemon {
     }
 
     @Override
-    public void setDefStat() {
+    public void setDefStat(int defstat) {
+
     }
 
     @Override
-    public String getattribute() {
+    public String getAttribute() {
         return this.attribute;
+    }
+
+    @Override
+    public void setAttribute(String attribute) {
+
     }
 
     @Override
@@ -149,20 +160,25 @@ public class Pidgey extends Sprite implements Pokemon {
     }
 
     @Override
+    public Pokemon getOpponent() {
+        return null;
+    }
+
+    @Override
     public boolean levelup(int exp) {
         this.experience += exp;
+        System.out.println(this.experience);
         if (this.experience >= this.getLevel() * 10) {
             this.level += 1;
             this.experience = 0;
             this.attackStat += 2;
             this.defStat += 1;
             this.endurance += 2;
-            this.sethp(this.getEndurance() * 2);
+            this.setHP(this.getEndurance() * 2);
             return true;
         } else {
             return false;
         }
-
     }
 
     @Override
@@ -172,7 +188,12 @@ public class Pidgey extends Sprite implements Pokemon {
 
     @Override
     public String getName() {
-        return this.name = "Pidgey";
+        return this.name = "MissingNO";
+    }
+
+    @Override
+    public void setName(int name) {
+
     }
 
     @Override
@@ -180,11 +201,10 @@ public class Pidgey extends Sprite implements Pokemon {
         if (pocet == 0) {
             oricolor = super.getColor();
         }
-               if(pocet%10 == 0){
+        if (pocet % 10 == 0) {
             super.setColor(Color.DARK_GRAY);
-        }
-        else if(pocet%5==0){
-             super.setColor(oricolor);
+        } else if (pocet % 5 == 0) {
+            super.setColor(oricolor);
         }
 
         if (pocet == 74) {
@@ -200,8 +220,7 @@ public class Pidgey extends Sprite implements Pokemon {
     }
 
     @Override
-    public void settrainer(boolean trainer) {
-        super.setTexture(new Texture("Bpidgey.png"));
+    public void setTrainer(boolean trainer) {
+        // this.trainer=trainer;
     }
-
 }

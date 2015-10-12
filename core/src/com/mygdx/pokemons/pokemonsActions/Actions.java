@@ -3,17 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mygdx.game.pokemons;
+package com.mygdx.pokemons.pokemonsActions;
 
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- *
  * @author Ján
  */
 public class Actions {
-
     private final Map<String, AbstractAttack> attacks;
 
     public Actions() {
@@ -32,80 +30,72 @@ public class Actions {
         AbstractAttack attack = this.attacks.get(name);
         if (attack != null) {
             attack.execute(allie, enemy);
-            
         }
     }
 
     private abstract class AbstractAttack {
-
         public abstract void execute(Pokemon allie, Pokemon enemy);
     }
 
     private class ScratchAttack extends AbstractAttack {
-
         @Override
         public void execute(Pokemon allie, Pokemon enemy) {
-            enemy.sethp(enemy.gethp() - 1 * allie.getAttStat());
+            enemy.setHP(enemy.getHP() - allie.getAttStat());
         }
     }
 
     private class BiteAttack extends AbstractAttack {
-
         @Override
         public void execute(Pokemon allie, Pokemon enemy) {
-            enemy.sethp(enemy.gethp()  - 1 * allie.getAttStat());
+            enemy.setHP(enemy.getHP() - allie.getAttStat());
         }
     }
 
     private class EmberAttack extends AbstractAttack {
-
         @Override
         public void execute(Pokemon allie, Pokemon enemy) {
-            if("Grass".equals(enemy.getattribute()))
-            enemy.sethp(enemy.gethp() - 2*allie.getAttStat());
-            else enemy.sethp((int) (enemy.gethp() - 1.5*allie.getAttStat()));
+            if ("Grass".equals(enemy.getAttribute()))
+                enemy.setHP(enemy.getHP() - 2 * allie.getAttStat());
+            else
+                enemy.setHP((int) (enemy.getHP() - 1.5 * allie.getAttStat()));
         }
     }
 
     private class BubbleAttack extends AbstractAttack {
-
         @Override
         public void execute(Pokemon allie, Pokemon enemy) {
-                        if("Fire".equals(enemy.getattribute()))
-            enemy.sethp(enemy.gethp() - 2*allie.getAttStat());
-            else enemy.sethp((int) (enemy.gethp() - 1.5*allie.getAttStat()));
+            if ("Fire".equals(enemy.getAttribute()))
+                enemy.setHP(enemy.getHP() - 2 * allie.getAttStat());
+            else
+                enemy.setHP((int) (enemy.getHP() - 1.5 * allie.getAttStat()));
         }
     }
 
     private class GrowlAttack extends AbstractAttack {
-
         @Override
         public void execute(Pokemon allie, Pokemon enemy) {
-            enemy.sethp(enemy.gethp() - 20);
+            enemy.setHP(enemy.getHP() - 20);
         }
     }
 
     private class SplashAttack extends AbstractAttack {
-
         @Override
         public void execute(Pokemon allie, Pokemon enemy) {
-            enemy.sethp(enemy.gethp() - 0);
+            enemy.setHP(enemy.getHP());
         }
     }
 
     private class QuickAttack extends AbstractAttack {
-
         @Override
         public void execute(Pokemon allie, Pokemon enemy) {
-            enemy.sethp(enemy.gethp() - 1*allie.getAttStat());
-        }
-    }
-        private class Tackle extends AbstractAttack {
-
-        @Override
-        public void execute(Pokemon allie, Pokemon enemy) {
-            enemy.sethp(enemy.gethp() - 1*allie.getAttStat());
+            enemy.setHP(enemy.getHP() - allie.getAttStat());
         }
     }
 
+    private class Tackle extends AbstractAttack {
+        @Override
+        public void execute(Pokemon allie, Pokemon enemy) {
+            enemy.setHP(enemy.getHP() - allie.getAttStat());
+        }
+    }
 }

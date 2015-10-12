@@ -6,24 +6,24 @@
 package com.mygdx.items;
 
 import com.mygdx.game.Player;
-import com.mygdx.game.pokemons.Pokemon;
+import com.mygdx.pokemons.pokemonsActions.Pokemon;
 
 /**
- *
  * @author Ján
  */
-public class Pokeball implements Item{
+public class Pokeball implements Item {
     private final String name;
     private int uses;
     private final String desc;
-    public Pokeball(){
-    this.name="Pokeball";
-    this.uses=1;
-    this.desc="Catches a enemy pokemon";
-}
+
+    public Pokeball() {
+        this.name = "Pokeball";
+        this.uses = 1;
+        this.desc = "Catches a enemy pokemon";
+    }
 
     @Override
-    public void use(Player player,Pokemon allie, Pokemon enemy) {
+    public void use(Player player, Pokemon allie, Pokemon enemy) {
         player.addpokemon(enemy);
         uses--;
     }
@@ -47,5 +47,4 @@ public class Pokeball implements Item{
     public String getDescription() {
         return this.desc;
     }
-    
 }

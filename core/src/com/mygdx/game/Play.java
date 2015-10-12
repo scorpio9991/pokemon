@@ -20,16 +20,14 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
-import com.mygdx.game.pokemons.Charmander;
-import com.mygdx.game.pokemons.Psyduck;
+import com.mygdx.pokemons.Charmander;
+import com.mygdx.pokemons.Psyduck;
 import java.util.Random;
 
 /**
- *
  * @author Ján
  */
 class Play implements Screen {
-
     private TiledMap mainmap;
     private OrthogonalTiledMapRenderer renderer;
     private OrthographicCamera camera;
@@ -80,7 +78,6 @@ class Play implements Screen {
         combatsound = Gdx.audio.newSound(Gdx.files.internal("BattleSound.mp3"));
         start = System.currentTimeMillis();
         pokefactory = new PokeFactory();
-
     }
 
     @Override
@@ -90,7 +87,7 @@ class Play implements Screen {
         blockedmap = (TiledMapTileLayer) mainmap.getLayers().get("walls");
         Renderedhome = new OrthogonalTiledMapRenderer(homemap);
         Renderedmap = new OrthogonalTiledMapRenderer(mainmap);
-        if (this.homeSwitch == false) {
+        if (!this.homeSwitch) {
             renderer = Renderedmap;
         } else {
             renderer = Renderedhome;
@@ -112,12 +109,11 @@ class Play implements Screen {
         BlockedObjectshome = homemap.getLayers().get("block").getObjects();
         DangerObjects = mainmap.getLayers().get("danger").getObjects();
         Danger2Objects = mainmap.getLayers().get("danger2").getObjects();
-        
     }
 
     @Override
     public void render(float delta) {
-     //   System.out.println(this.player.getX() + "  and Y:" + this.player.getY());
+        //   System.out.println(this.player.getX() + "  and Y:" + this.player.getY());
         combatsound.stop();
         Random random = new Random();
         if (player.getX() == 32 && player.getY() == 192) {
@@ -137,25 +133,22 @@ class Play implements Screen {
         renderer.render();
         renderer.getBatch().begin();
         player.draw(renderer.getBatch());
-
-        if (menurender == true) {
-
+        if (menurender) {
             game.setScreen(new Menu(game, this, player, null));
         }
         player.setPosition(player.getX(), player.getY());
         chance = movement(chance, random);
         renderer.getBatch().end();
-        if (homeSwitch == false) {
+        if (!homeSwitch) {
             CollisionOutside(chance);
         } else {
             for (RectangleMapObject rectangleObject : BlockedObjectshome.getByType(RectangleMapObject.class)) {
-
                 Rectangle rectangle = rectangleObject.getRectangle();
-                if (Intersector.overlaps(rectangle, player.getBoundingRectangle()) && this.ismoving == false) {
+                if (Intersector.overlaps(rectangle, player.getBoundingRectangle()) && !this.ismoving) {
                     isBlocked = true;
                 }
             }
-            if (isBlocked == true) {
+            if (isBlocked) {
                 player.setX(OldX);
                 player.setY(OldY);
             }
@@ -166,7 +159,6 @@ class Play implements Screen {
                 this.player.setY(176);
                 this.player.setTexture(pdown);
             }
-
         }
         camera.zoom = (float) 0.5;
         camera.position.set(player.getX(), player.getY(), 0);
@@ -176,50 +168,43 @@ class Play implements Screen {
     private void CollisionOutside(int chance) {
         /* checks for collision with the player rectangle */
         for (RectangleMapObject rectangleObject : BlockedObjects.getByType(RectangleMapObject.class)) {
-
             Rectangle rectangle = rectangleObject.getRectangle();
-            if (Intersector.overlaps(rectangle, player.getBoundingRectangle()) && this.ismoving == false) {
+            if (Intersector.overlaps(rectangle, player.getBoundingRectangle()) && !this.ismoving) {
                 isBlocked = true;
             }
         }
         for (RectangleMapObject rectangleObject : DangerObjects.getByType(RectangleMapObject.class)) {
-
             Rectangle rectangle2 = rectangleObject.getRectangle();
             if (Intersector.overlaps(rectangle2, player.getBoundingRectangle())) {
                 danger = true;
             }
         }
         for (RectangleMapObject rectangleObject : Danger2Objects.getByType(RectangleMapObject.class)) {
-
             Rectangle rectangle2 = rectangleObject.getRectangle();
             if (Intersector.overlaps(rectangle2, player.getBoundingRectangle())) {
                 danger2 = true;
             }
         }
-        if (isBlocked == true) {
+        if (isBlocked) {
             player.setX(OldX);
             player.setY(OldY);
         }
-        if (danger == true) {
+        if (danger) {
             if (chance == 1) {
-
                 combatsound.loop((float) 0.1);
                 game.setScreen(new Combat(game, this, player, pokefactory.getPoke("Caterpie", false), null));
             }
             if (chance == 2) {
-
                 combatsound.loop((float) 0.1);
                 game.setScreen(new Combat(game, this, player, pokefactory.getPoke("Pidgey", false), null));
             }
         }
-        if (danger2 == true) {
+        if (danger2) {
             if (chance == 1) {
-
                 combatsound.loop((float) 0.1);
                 game.setScreen(new Combat(game, this, player, new Psyduck(8, false), null));
             }
             if (chance == 2) {
-
                 combatsound.loop((float) 0.1);
                 game.setScreen(new Combat(game, this, player, new Charmander(8, false), null));
             }
@@ -227,8 +212,7 @@ class Play implements Screen {
     }
 
     private int movement(int chance, Random random) {
-
-        if ((Gdx.input.isKeyPressed(Input.Keys.UP) || this.movingup == true) && !(this.movingdown == true) && !(this.movingleft == true) && !(this.movingright == true)) {
+        if ((Gdx.input.isKeyPressed(Input.Keys.UP) || this.movingup) && !(this.movingdown) && !(this.movingleft) && !(this.movingright)) {
             if (pocetk == 0) {
                 this.OldX = player.getX();
                 this.OldY = player.getY();
@@ -253,7 +237,7 @@ class Play implements Screen {
                     foot = true;
                 }
             }
-        } else if ((Gdx.input.isKeyPressed(Input.Keys.LEFT) || this.movingleft == true) && !(this.movingup == true) && !(this.movingright == true) && !(this.movingdown == true)) {
+        } else if ((Gdx.input.isKeyPressed(Input.Keys.LEFT) || this.movingleft) && !(this.movingup) && !(this.movingright) && !(this.movingdown)) {
             if (pocetk == 0) {
                 this.OldX = player.getX();
                 this.OldY = player.getY();
@@ -269,7 +253,6 @@ class Play implements Screen {
                 ismoving = false;
                 player.setTexture(pleft);
             }
-
             if (pocetk == 8) {
                 if (foot) {
                     player.setTexture(pleftleft);
@@ -279,14 +262,12 @@ class Play implements Screen {
                     foot = true;
                 }
             }
-
-        } else if ((Gdx.input.isKeyPressed(Input.Keys.RIGHT) || this.movingright == true) && !(this.movingup == true) && !(this.movingleft == true) && !(this.movingdown == true)) {
+        } else if ((Gdx.input.isKeyPressed(Input.Keys.RIGHT) || this.movingright) && !(this.movingup) && !(this.movingleft) && !(this.movingdown)) {
             if (pocetk == 0) {
                 this.OldX = player.getX();
                 this.OldY = player.getY();
             }
             player.moveright();
-
             this.ismoving = true;
             pocetk++;
             this.movingright = true;
@@ -306,7 +287,7 @@ class Play implements Screen {
                     foot = true;
                 }
             }
-        } else if ((Gdx.input.isKeyPressed(Input.Keys.DOWN) || this.movingdown == true) && !(this.movingup == true) && !(this.movingright == true) && !(this.movingleft == true)) {
+        } else if ((Gdx.input.isKeyPressed(Input.Keys.DOWN) || this.movingdown) && !(this.movingup) && !(this.movingright) && !(this.movingleft)) {
             if (pocetk == 0) {
                 this.OldX = player.getX();
                 this.OldY = player.getY();
@@ -331,12 +312,10 @@ class Play implements Screen {
                     foot = true;
                 }
             }
-
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.C)) {
             menurender = true;
         }
-
         return chance;
     }
 
@@ -349,12 +328,10 @@ class Play implements Screen {
 
     @Override
     public void pause() {
-
     }
 
     @Override
     public void resume() {
-
     }
 
     @Override
@@ -364,7 +341,6 @@ class Play implements Screen {
 
     @Override
     public void dispose() {
-
         mainmap.dispose();
         renderer.dispose();
         player.getTexture().dispose();
@@ -381,11 +357,9 @@ class Play implements Screen {
         pupleft.dispose();
         pupright.dispose();
         //    combatsound.dispose();
-
     }
 
     public void menuStop() {
-
         this.menurender = false;
     }
 
@@ -402,12 +376,10 @@ class Play implements Screen {
         if (this.player.getDirection() == 0) {
             this.player.setTexture(pup);
         }
-
     }
 
     public OrthogonalTiledMapRenderer renderBackground() {
         return renderer;
-
     }
 
     public int getHours() {
@@ -417,5 +389,4 @@ class Play implements Screen {
     public int getMin() {
         return (int) (elapsedTimeMillis / (60 * 1000F));
     }
-
 }
